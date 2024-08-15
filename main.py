@@ -19,8 +19,46 @@ frame_up.grid(row=0, column=0, padx=0, pady=1)
 frame_down = Frame(window, width=500, height=150, bg=co0)
 frame_down.grid(row=1, column=0, padx=0, pady=1)
 
-frame_table = Frame(window, width=500, height=100, bg=co2)
-frame_table.grid(row=2, column=0, columnspan=2, padx=0, pady=1)
+frame_table = Frame(window, width=500, height=100, bg=co0)
+frame_table.grid(row=2, column=0, columnspan=2, padx=0, pady=1, sticky=NW)
+
+
+#functions
+def show():
+    global tree
+
+    listheader = ['Name', 'Gender', 'Telephone', 'Email']
+
+    demo_list = [['John', 'M', '12345', 'john123@gmail.com'], ['Jack', 'M', '89655', 'jack3@gmail.com']]
+
+    tree = ttk.Treeview(frame_table, selectmode="extended", columns=listheader, show="headings")
+
+    vsb = ttk.Scrollbar(frame_table, orient="vertical", command=tree.yview)
+    hsb = ttk.Scrollbar(frame_table, orient="horizontal", command=tree.xview)
+
+    tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+
+    tree.grid(column=0, row=0, sticky='nsew')
+    vsb.grid(column=1, row=0, sticky='ns')
+    hsb.grid(column=0, row=1, sticky='ew')
+
+    #tree head
+    tree.heading(0, text='Name', anchor=NW)
+    tree.heading(1, text='Gender', anchor=NW)
+    tree.heading(2, text='Telephone', anchor=NW)
+    tree.heading(3, text='Email', anchor=NW)
+
+    #tree columns
+    tree.column(0, width=120, anchor='nw')
+    tree.column(1, width=50, anchor='nw')
+    tree.column(2, width=100, anchor='nw')
+    tree.column(3, width=180, anchor='nw')
+
+    for item in demo_list:
+        tree.insert('', 'end', values=item)
+
+
+show()
 
 #frame_up widgets
 
@@ -28,6 +66,7 @@ app_name = Label(frame_up, text="Phonebook", height=1, font=('Verdana 17 bold'),
 app_name.place(x=5, y=5)
 
 #frame_down widgets
+
 l_name = Label(frame_down, text="Name *", width=20, height=1, font=('Ivy 10'), bg=co0, anchor=NW)
 l_name.place(x=10, y=20)
 e_name = Entry(frame_down, width=25, justify='left', highlightthickness=1, relief="solid")

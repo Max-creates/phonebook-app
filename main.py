@@ -19,8 +19,8 @@ frame_up.grid(row=0, column=0, padx=0, pady=1)
 frame_down = Frame(window, width=500, height=150, bg=co0)
 frame_down.grid(row=1, column=0, padx=0, pady=1)
 
-frame_table = Frame(window, width=500, height=100, bg=co0)
-frame_table.grid(row=2, column=0, columnspan=2, padx=0, pady=1, sticky=NW)
+frame_table = Frame(window, width=500, height=100, bg=co0, relief="flat")
+frame_table.grid(row=2, column=0, columnspan=2, padx=10, pady=1, sticky=NW)
 
 
 #functions
@@ -61,12 +61,10 @@ def show():
 show()
 
 #frame_up widgets
-
 app_name = Label(frame_up, text="Phonebook", height=1, font=('Verdana 17 bold'), bg=co2, fg=co0)
 app_name.place(x=5, y=5)
 
 #frame_down widgets
-
 l_name = Label(frame_down, text="Name *", width=20, height=1, font=('Ivy 10'), bg=co0, anchor=NW)
 l_name.place(x=10, y=20)
 e_name = Entry(frame_down, width=25, justify='left', highlightthickness=1, relief="solid")

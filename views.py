@@ -1,4 +1,3 @@
-import sys
 import csv
 
 
@@ -15,6 +14,7 @@ def view():
         for row in reader:
             data.append(row)
     print(data)
+    return data
 
 
 def remove(i):

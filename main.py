@@ -81,6 +81,52 @@ def insert():
         e_email.delete(0, 'end')
         show()
 
+
+def to_update():
+    try:
+        tree_data = tree.focus()
+        tree_dictionary = tree.item(tree_data)
+        tree_list = tree_dictionary['values']
+
+        Name = str(tree_list[0])
+        Gender = str(tree_list[1])
+        Telephone = str(tree_list[2])
+        Email = str(tree_list[3])
+
+        e_name.insert(0, Name)
+        c_gender.insert(0, Gender)
+        e_telephone.insert(0, Telephone)
+        e_email.insert(0, Email)
+
+        def confirm():
+            new_name = e_name.get()
+            new_gender = c_gender.get()
+            new_telephone = e_telephone.get()
+            new_email = e_email.get()
+
+            data = [new_telephone, new_name, new_gender, new_telephone, new_email]
+
+            update(data)
+
+            messagebox.showinfo('Success', 'data updated successfully')
+
+            e_name.delete(0, 'end')
+            c_gender.delete(0, 'end')
+            e_telephone.delete(0, 'end')
+            e_email.delete(0, 'end')
+
+            for widget in frame_table.winfo_children():
+                widget.destroy()
+
+            b_confirm.destroy()
+
+            show()
+        b_confirm = Button(frame_down, text="Confirm", width=10, height=1, bg=co2, fg=co0, font=('Ivy 8 bold'), command=confirm)
+        b_confirm.place(x=290, y=110)
+    except IndexError:
+        messagebox.showerror('Error', 'Select one of them from the table!')
+
+
 #frame_up widgets
 app_name = Label(frame_up, text="Phonebook", height=1, font=('Verdana 17 bold'), bg=co2, fg=co0)
 app_name.place(x=5, y=5)
@@ -118,7 +164,7 @@ b_view.place(x=290, y=50)
 b_add = Button(frame_down, text="Add", width=10, height=1, bg=co2, fg=co0, font=('Ivy 8 bold'), command=insert)
 b_add.place(x=400, y=50)
 
-b_update = Button(frame_down, text="Update", width=10, height=1, bg=co2, fg=co0, font=('Ivy 8 bold'))
+b_update = Button(frame_down, text="Update", width=10, height=1, bg=co2, fg=co0, font=('Ivy 8 bold'), command=to_update)
 b_update.place(x=400, y=80)
 
 b_delete = Button(frame_down, text="Delete", width=10, height=1, bg=co2, fg=co0, font=('Ivy 8 bold'))

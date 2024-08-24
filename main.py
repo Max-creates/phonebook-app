@@ -127,6 +127,43 @@ def to_update():
         messagebox.showerror('Error', 'Select one of them from the table!')
 
 
+def to_remove():
+    try:
+        tree_data = tree.focus()
+        tree_dictionary = tree.item(tree_data)
+        print(tree_dictionary, 'tree dict')
+        tree_list = tree_dictionary['values']
+        tree_telephone = str(tree_list[2])
+
+        remove(tree_telephone)
+
+        messagebox.showinfo('Success', 'Data has been deleted successfully!')
+
+        for widget in frame_table.winfo_children():
+            widget.destroy()
+
+        show()
+
+    except IndexError:
+        messagebox.showerror('Error', 'Select one of them from the table!')
+
+
+def to_search():
+    telephone = e_search.get()
+
+    data = search(telephone)
+
+    def delete_command():
+        tree.delete(*tree.get_children())
+
+    delete_command()
+
+    for i in data:
+        tree.insert('', 'end', values= i)
+
+    e_search.delete(0, 'end')
+
+
 #frame_up widgets
 app_name = Label(frame_up, text="Phonebook", height=1, font=('Verdana 17 bold'), bg=co2, fg=co0)
 app_name.place(x=5, y=5)
@@ -153,12 +190,12 @@ l_email.place(x=10, y=110)
 e_email = Entry(frame_down, width=25, justify='left', highlightthickness=1, relief="solid")
 e_email.place(x=80, y=110)
 
-b_search = Button(frame_down, text="Search", height=1, bg=co2, fg=co0, font=('Ivy 8 bold'))
+b_search = Button(frame_down, text="Search", height=1, bg=co2, fg=co0, font=('Ivy 8 bold'), command=to_search)
 b_search.place(x=290, y=20)
 e_search = Entry(frame_down, width=16, justify='left', font=('Ivy, 11'), highlightthickness=1, relief="solid")
 e_search.place(x=347, y=20)
 
-b_view = Button(frame_down, text="View", width=10, height=1, bg=co2, fg=co0, font=('Ivy 8 bold'))
+b_view = Button(frame_down, text="View", width=10, height=1, bg=co2, fg=co0, font=('Ivy 8 bold'), command=show)
 b_view.place(x=290, y=50)
 
 b_add = Button(frame_down, text="Add", width=10, height=1, bg=co2, fg=co0, font=('Ivy 8 bold'), command=insert)
@@ -167,7 +204,7 @@ b_add.place(x=400, y=50)
 b_update = Button(frame_down, text="Update", width=10, height=1, bg=co2, fg=co0, font=('Ivy 8 bold'), command=to_update)
 b_update.place(x=400, y=80)
 
-b_delete = Button(frame_down, text="Delete", width=10, height=1, bg=co2, fg=co0, font=('Ivy 8 bold'))
+b_delete = Button(frame_down, text="Delete", width=10, height=1, bg=co2, fg=co0, font=('Ivy 8 bold'), command=to_remove)
 b_delete.place(x=400, y=110)
 
 window.mainloop()

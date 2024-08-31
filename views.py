@@ -18,7 +18,7 @@ def view():
 
 def remove(i):
     def save(j):
-        with open('data.csv', 'w') as file:
+        with open('data.csv', mode='w', newline='') as file:
             writer = csv.writer(file)
             writer.writerows(j)
 
@@ -34,6 +34,7 @@ def remove(i):
             for element in row:
                 if element == telephone:
                     new_list.remove(row)
+                    break
     save(new_list)
 
 
@@ -74,5 +75,7 @@ def search(i):
             for element in row:
                 if element == telephone:
                     data.append(row)
-    print(data)
     return data
+
+
+remove('437889')

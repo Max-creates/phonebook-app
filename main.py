@@ -63,16 +63,15 @@ show()
 
 
 def insert():
-    Name = e_name.get()
-    Gender = c_gender.get()
-    Telephone = e_telephone.get()
-    Email = e_email.get()
+    name = e_name.get()
+    gender = c_gender.get()
+    telephone = e_telephone.get()
+    email = e_email.get()
 
-    data = [Name, Gender, Telephone, Email]
-
-    if Name == '' or Gender == '' or Telephone == '' or Email == '':
+    if name == '' or gender == '' or telephone == '' or email == '':
         messagebox.showwarning('data', 'Please fill in all fields.')
     else:
+        data = [name, gender, telephone, email]
         add(data)
         messagebox.showinfo('data', 'Data added successfully!')
         e_name.delete(0, 'end')
@@ -131,7 +130,6 @@ def to_remove():
     try:
         tree_data = tree.focus()
         tree_dictionary = tree.item(tree_data)
-        print(tree_dictionary, 'tree dict')
         tree_list = tree_dictionary['values']
         tree_telephone = str(tree_list[2])
 
